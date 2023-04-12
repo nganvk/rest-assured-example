@@ -66,6 +66,20 @@ public class UsersTest extends TestBase {
                 .extracting("firstName", "lastName", "age")
                 .contains(tuple(expected.firstName, expected.lastName, expected.age));
     }
+    @Test
+    public void shouldRetrieveListOfAllUsers () {
+        REQUEST.get("/users")
+                .then()
+                .statusCode(500);
+    }
+
+    @Test
+    public void shouldGetUserById () {
+        Integer id = 123;
+        REQUEST.get("/user" + id)
+                .then ()
+                .statusCode(404);
+    }
 
     private User generateNewUser(){
         String firstName = FAKER.name().firstName();
